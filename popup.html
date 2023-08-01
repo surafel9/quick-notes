@@ -4,28 +4,34 @@
 <head>
     <title>QuickNote</title>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #222;
-            color: #fff;
-            padding: 10px;
-            width: 300px;
-            box-sizing: border-box;
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #ccc;
+            --danger-color: #dc3545;
+            --accent-color: #ffd700;
+            --hover-color: #5e93cb;
         }
 
-        #wraper {
-            margin: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-
+        body {
+            font-family: 'Arial', sans-serif;
+            width: 300px;
+            box-sizing: border-box;
+            background-color: #333;
+            color: #f7f7f7;
+            overflow: hidden;
         }
 
         h1 {
             text-align: center;
             margin-bottom: 20px;
-            color: #fff;
+            color: var(--primary-color);
+        }
+
+        #wrapper {
+            padding: 10px;
+            margin: 10px;
+            display: flex;
+            flex-direction: column;
         }
 
         #noteInput {
@@ -33,12 +39,10 @@
             resize: vertical;
             font-size: 14px;
             padding: 10px;
-            border: 1px solid #444;
+            border: 1px solid var(--secondary-color);
             border-radius: 4px;
-            background-color: #333;
-            color: #fff;
+            box-sizing: border-box;
             outline: none;
-            /* Remove default outline */
         }
 
         #saveButton {
@@ -48,41 +52,109 @@
             padding: 10px;
             font-size: 14px;
             color: #fff;
-            background-color: #007bff;
-            /* Revert button color to blue */
+            background-color: var(--primary-color);
             border: none;
             border-radius: 4px;
             cursor: pointer;
         }
 
-        #saveButton:hover {
-            background-color: #0056b3;
-            /* Slightly darker blue on hover */
+        #notesList {
+            padding: 0;
+            margin-top: 20px;
+            max-height: 300px;
+            overflow-y: auto;
         }
 
+
+        #notesList::-webkit-scrollbar {
+            width: 1px;
+        }
+
+        #notesList::-webkit-scrollbar-thumb {
+            background-color: #333;
+        }
+
+        #notesList::-webkit-scrollbar-thumb:hover {
+            background-color: #999;
+        }
+
+
         #notesList {
-            margin-top: 20px;
+            scrollbar-width: thin;
+            scrollbar-color: #333 #f7f7f7;
+        }
+
+        #notesList::-moz-scrollbar-thumb {
+            background-color: var(--);
+        }
+
+        #notesList::-moz-scrollbar-thumb:hover {
+            background-color: #999;
         }
 
         .noteItem {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
             margin-bottom: 10px;
-            background-color: #444;
-            padding: 8px;
-            border: 1px solid #555;
+            padding: 10px;
+            color: #333;
+            border: 1px solid var(--secondary-color);
             border-radius: 4px;
+            box-sizing: border-box;
+            background-color: #fff;
+            width: 100%;
         }
 
         .noteTimestamp {
             font-size: 12px;
-            color: #999;
+            color: #777;
+        }
+
+        .btn-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-direction: row;
+            margin-top: 10px;
+            gap: 5px;
+        }
+
+        .btn {
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: var(--primary-color);
+            color: #333;
+        }
+
+        .btn:hover {
+            background-color: var(--hover-color);
+        }
+
+        .deleteBtn {
+            background-color: var(--danger-color);
+            color: #fff;
+        }
+
+        .deleteBtn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .alarm-active {
+            background-color: var(--accent-color);
+
         }
     </style>
 </head>
 
 <body>
-    <div id="wraper">
+    <div id="wrapper">
         <h1>QuickNote</h1>
-        <textarea id="noteInput" rows="6" placeholder="Type your note here"></textarea>
+        <textarea id="noteInput" rows="6" placeholder="Type your note here" autocomplete="true" autofocus
+            aria-autocomplete="both"></textarea>
         <button id="saveButton">Save Note</button>
         <div id="notesList">
             <!-- Display saved notes here -->

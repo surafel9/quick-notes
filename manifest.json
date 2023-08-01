@@ -1,10 +1,10 @@
 {
-	"manifest_version": 2,
+	"manifest_version": 3,
 	"name": "QuickNote",
-	"version": " 0.0.0.1",
+	"version": "0.4",
 	"description": "A simple note-taking extension for quick notes while browsing.",
-	"permissions": ["activeTab", "storage", "alarms"],
-	"browser_action": {
+	"permissions": ["activeTab", "storage", "alarms", "notifications"],
+	"action": {
 		"default_popup": "popup.html"
 	},
 	"icons": {
@@ -13,8 +13,7 @@
 		"192": "icon192.png"
 	},
 	"background": {
-		"scripts": ["background.js"],
-		"persistent": false
+		"service_worker": "background.js"
 	},
 	"content_scripts": [
 		{
@@ -22,5 +21,14 @@
 			"js": ["content_script.js"]
 		}
 	],
-	"web_accessible_resources": ["popup.html"]
+	"web_accessible_resources": [
+		{
+			"resources": ["popup.html"],
+			"matches": ["<all_urls>"]
+		},
+		{
+			"resources": ["icon16.png", "icon32.png", "icon192.png"],
+			"matches": ["<all_urls>"]
+		}
+	]
 }
